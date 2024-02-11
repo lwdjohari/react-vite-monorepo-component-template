@@ -1,0 +1,34 @@
+{
+  "name": "root",
+  "version": "0.2.3",
+  "description": "Template for modern React vite monorepo development with lerna, react, vite, rollup and storybook.",
+  "main": "index.js",
+  "repository": "git@github.com-lwdjohari:lwdjohari/react-vite-monorepo-component-template.git",
+  "author": "lwdjohari <linggawasistha.djohari@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "@scope/shared-package"
+  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "scripts": {
+    "build": "lerna exec --scope @scope/shared-package -- npm run build"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.9",
+    "@mui/joy": "^5.0.0-beta.27",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^20.11.17",
+    "glob": "^10.3.10",
+    "lerna": "^8.1.2",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.7.2",
+    "vite-plugin-lib-inject-css": "^1.3.0"
+  }
+}
