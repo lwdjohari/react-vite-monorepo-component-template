@@ -5,14 +5,15 @@ import { glob } from 'glob'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import { libInjectCss } from 'vite-plugin-lib-inject-css'
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     libInjectCss(),
     dts({ include: ['lib'] })
   ],
+
   build: {
     copyPublicDir: false,
     lib: {
@@ -20,7 +21,18 @@ export default defineConfig({
       formats: ['es']
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime'],
+      treeshake: true,
+      plugins: [
+        peerDepsExternal(), // new line
+      ],
+      external: [
+        "react",
+        "react/jsx-runtime",
+        "react-dom",
+        "@emotion/react",
+        '@emotion/styled',
+        "@mui/icons-material",
+        "@mui/joy"],
       input: Object.fromEntries(
         // https://rollupjs.org/configuration-options/#input
         glob.sync('lib/**/*.{ts,tsx}').map(file => [
@@ -40,5 +52,16 @@ export default defineConfig({
         entryFileNames: '[name].js',
       }
     }
-  }
+  },
+  optimizeDeps: {
+    exclude: [
+      'react',
+      "react/jsx-runtime",
+      'react-dom',
+      '@emotion/react',
+      '@emotion/styled',
+      '@mui/icons-material',
+      '@mui/joy',
+    ], // Exclude peer dependencies
+  },
 })
