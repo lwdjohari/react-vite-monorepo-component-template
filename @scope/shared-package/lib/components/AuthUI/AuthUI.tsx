@@ -21,7 +21,7 @@ import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 interface AuthUIProps {
   username: string;
   password: string;
-  onSubmit: (username: string, password: string) => void;
+  onSubmit: (username: string, password: string) => void | null;
 }
 
 interface AuthFormElements extends HTMLFormControlsCollection {
